@@ -1,0 +1,57 @@
+
+form{
+    display: flex;
+    justify-content:center;
+    gap:10px;
+}
+
+
+.player{
+    display: flex;
+    justify-content: space-around;
+    width:250px;
+    height: 50px;
+    border-radius: 20px;
+    border: solid 1px;
+}
+img{
+    width:20px;
+}
+.song{
+    display:flex;
+    justify-content:space-between;
+    align-items: center;
+    border-radius: 20px;
+    border: solid 1px;
+    padding: 20px;
+    width:50%;
+    height: 1vw;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.basket, .download{
+    background-color: white;
+    border:0;
+}
+img, button, .file{
+    cursor: pointer;
+}
+section{
+    display: flex;
+    flex-direction: column;
+    padding:10px;
+    justify-content:center;
+    gap:10px;
+}
+.addToPlaylist{
+    border-radius: 20px;
+    border: solid 1px;
+    width: 20vw;
+    min-width: 150px;
+    height: 3vw;
+    min-height: 25px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.addToPlaylist:hover, .song:hover{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+}

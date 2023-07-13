@@ -6,8 +6,8 @@
          <option value="file">File</option>
      </select>
  
-     <input id="url" type="text" placeholder="Saisir une URL" *ngIf="filePathSelect === 'url'">
-     <input id="file" type="file" *ngIf="filePathSelect === 'file'" accept="audio/*" (change)="interceptPath($event)">
+     <input #url type="text" placeholder="Saisir une URL" *ngIf="filePathSelect === 'url'">
+     <input #file type="file" *ngIf="filePathSelect === 'file'" accept="audio/*" (change)="interceptPath($event)">
      
   </form>
  </section>

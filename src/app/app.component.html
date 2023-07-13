@@ -6,22 +6,18 @@
          <option value="file">File</option>
      </select>
  
-     <input id="url" type="text" placeholder="Saisir une URL" *ngIf="filePathSelect === 'url'">
-     <input id="file" type="file" *ngIf="filePathSelect === 'file'" accept="audio/*" (change)="interceptPath($event)">
+     <input #url type="text" placeholder="Saisir une URL" *ngIf="filePathSelect === 'url'">
+     <input #file type="file" *ngIf="filePathSelect === 'file'" accept="audio/*" (change)="interceptPath($event)">
      
   </form>
  </section>
  
  <section>
  <button (click)="sendMusicToThePlaylist()" class="addToPlaylist">Ajouter à la playlist</button>
-  <div *ngFor="let music of filesArray; let index = index;" class="song">
+  <div *ngFor="let music of filesArray; let index = index;" class="song" [ngClass]="{'musicPlay':index===readingTitle}">
      <div (click)="fileSelected(index)" class="file">{{music.name}}</div>
-     <progress *ngIf="readingTitle===index" [value]="progress" max="100"></progress>
-     <audio id="myAudio{{index}}" type="audio/mpeg" [src]=music.path (timeupdate)="updateProgressBar($event)">
-         <a href=music.path >
-             {{ music.path }}
-         </a>
-     </audio>
+     
+    
      <div>
          <button class="download">
              <a href={{music.path}} download={{music.name}}>
@@ -43,5 +39,9 @@
  <img src="../../assets/break.svg" alt="Image pause" (click)="break()" *ngIf="musicIsReading">
  <img src="../../assets/next.svg" alt="Image suivant" (click)="next()">
  </div>
+ <audio #music type="audio/mpeg" [src]=musicTodisplay.path (timeupdate)="updateProgressBar($event)">
+    
+</audio>
+ <progress [value]="progress" max="100"></progress>
  </section>
  

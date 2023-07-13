@@ -15,11 +15,12 @@ export class AppComponent {
   readingTitle: number = 0;
   progress: number = 0;
   blobLocalMusic!:any;
+  musicTodisplay:any = {path:"", name:""}
  
   
    @ViewChild('url') myUrlElement!: ElementRef<HTMLInputElement>;
    @ViewChild('file') myFileElement!: ElementRef<HTMLInputElement>;
-   //@ViewChild(this.filePathSelect,{static: false}) myMusicElement!: ElementRef<HTMLAudioElement>;
+   @ViewChild('music') myAudioElement!: ElementRef<HTMLAudioElement>;
 
   selectFilePath(e: any){
     this.filePathSelect = e.target.value;
@@ -37,8 +38,9 @@ export class AppComponent {
 
 playMusic(){
 this.musicIsReading = true;
-let music = document.getElementById("myAudio" + this.readingTitle) as HTMLAudioElement;
-music.play();
+this.musicTodisplay = this.filesArray[this.readingTitle];
+this.myAudioElement.nativeElement.play();
+
 }
 
 next(){
@@ -54,26 +56,24 @@ next(){
 
 stop(){
   this.musicIsReading = false;
-  let music = document.getElementById('myAudio' + this.readingTitle) as HTMLAudioElement;
-  music.pause();
-  music.currentTime = 0;
+  this.myAudioElement.nativeElement.pause();
+  this.myAudioElement.nativeElement.currentTime = 0;
 }
 
 back(){
   this.stop();
-  (this.readingTitle!==0) ? this.readingTitle-- : this.readingTitle=0;
+  (this.readingTitle!==0) ? this.readingTitle-- : this.readingTitle = 0;
   this.playMusic();
 }
 
 break(){
   this.musicIsReading = false;
-  let music = document.getElementById('myAudio' + this.readingTitle) as HTMLAudioElement;
-  music.pause();
+  this.myAudioElement.nativeElement.pause();
 }
 
-fileSelected(e:any){
+fileSelected(index:number){
   this.stop()
-  this.readingTitle = e;
+  this.readingTitle = index;
   this.playMusic();
 }
 

@@ -1,4 +1,6 @@
+import { HttpClientModule } from '@angular/common/http';
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -12,16 +14,18 @@ export class AppComponent {
   filesArray: any []=[{path:"../assets/01. Laid To Rest.mp3", name:"Laid To Rest"},
                       {path:"../assets/01. Wail of the North.mp3", name:"Wail of the North"}];
   musicIsReading: boolean = false;
-  readingTitle: number = 0;
+  readingTitle: number=0;
   progress: number = 0;
   blobLocalMusic!:any;
   musicTodisplay:any = {path:"", name:""}
+  isBreak:boolean = false;
  
   
    @ViewChild('url') myUrlElement!: ElementRef<HTMLInputElement>;
    @ViewChild('file') myFileElement!: ElementRef<HTMLInputElement>;
    @ViewChild('music') myAudioElement!: ElementRef<HTMLAudioElement>;
 
+   constructor(private http: HttpClientModule){}
   selectFilePath(e: any){
     this.filePathSelect = e.target.value;
   }
@@ -38,10 +42,17 @@ export class AppComponent {
 
 playMusic(){
 this.musicIsReading = true;
-this.musicTodisplay = this.filesArray[this.readingTitle];
-this.myAudioElement.nativeElement.play();
-
+if(!this.isBreak){
+  this.musicTodisplay = this.filesArray[this.readingTitle];
+  this.myAudioElement.nativeElement.load();
+  this.myAudioElement.nativeElement.play();
+  this.isBreak=false;
+}else{
+  this.myAudioElement.nativeElement.play();
+  this.isBreak=false;
 }
+}
+
 
 next(){
   if(this.readingTitle===this.filesArray.length-1){
@@ -51,6 +62,7 @@ next(){
   } else {
   this.stop();
   this.readingTitle++;
+  this.musicTodisplay = this.filesArray[this.readingTitle]
   this.playMusic();
 }}
 
@@ -63,11 +75,14 @@ stop(){
 back(){
   this.stop();
   (this.readingTitle!==0) ? this.readingTitle-- : this.readingTitle = 0;
+  this.musicTodisplay = this.filesArray[this.readingTitle]
   this.playMusic();
+  this.myAudioElement.nativeElement.play();
 }
 
 break(){
   this.musicIsReading = false;
+  this.isBreak=true;
   this.myAudioElement.nativeElement.pause();
 }
 

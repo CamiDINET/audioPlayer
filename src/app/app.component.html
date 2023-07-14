@@ -39,9 +39,9 @@
  <img src="../../assets/break.svg" alt="Image pause" (click)="break()" *ngIf="musicIsReading">
  <img src="../../assets/next.svg" alt="Image suivant" (click)="next()">
  </div>
- <audio #music type="audio/mpeg" [src]=musicTodisplay.path (timeupdate)="updateProgressBar($event)">
-    
+ <audio #music (timeupdate)="updateProgressBar($event)">
+    <source src={{musicTodisplay.path}} type="audio/mpeg">
 </audio>
- <progress [value]="progress" max="100"></progress>
+  <progress [value]="progress" max="100"></progress> 
  </section>
  

@@ -1,4 +1,6 @@
-
+*{
+    font-family: 'Michroma', sans-serif;
+}
 form{
     display: flex;
     justify-content:center;
@@ -6,7 +8,7 @@ form{
 }
 
 
-.player{
+.playerButton{
     display: flex;
     justify-content: space-around;
     width:250px;
@@ -52,9 +54,32 @@ section{
     min-height: 25px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
-.addToPlaylist:hover, .song:hover{
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+.addToPlaylist:hover, .song:hover, .playerButton:hover{
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+   
 }
 .musicPlay{
-    background-color: grey;
+    background-color: #D3D3D3;
+    .basket{background-color: #D3D3D3;}
+    .download{background-color: #D3D3D3;}
+}
+section{
+    display: flex;
+    align-items: center;
+}
+
+.bar{
+    background-color: black;
+    width: 250px;
+    border-radius: 20px;
+}
+progress[value] {
+    /* Reset the default appearance */
+    -webkit-appearance: none;
+     appearance: none;
+  }
+progress[value]::-webkit-progress-bar{
+    background-color: #D3D3D3;
+    width: 250px;
+    border-radius: 20px;
 }

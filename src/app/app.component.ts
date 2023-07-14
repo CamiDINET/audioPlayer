@@ -53,7 +53,6 @@ if(!this.isBreak){
 }
 }
 
-
 next(){
   if(this.readingTitle===this.filesArray.length-1){
     this.stop();

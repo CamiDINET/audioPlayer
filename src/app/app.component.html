@@ -15,10 +15,12 @@
  <section>
  <button (click)="sendMusicToThePlaylist()" class="addToPlaylist">Ajouter à la playlist</button>
   <div *ngFor="let music of filesArray; let index = index;" class="song" [ngClass]="{'musicPlay':index===readingTitle}">
-     <div (click)="fileSelected(index)" class="file">{{music.name}}</div>
+     <div class="file">{{music.name}}</div>
      
-    
      <div>
+         <button class="play" (click)="fileSelected(index)" *ngIf="index!==readingTitle">
+            <img src="../../assets/play.svg" alt="Image lecture">
+         </button>
          <button class="download">
              <a href={{music.path}} download={{music.name}}>
                  <img src="../../assets/download.svg" alt="logo téléchargement">
@@ -32,16 +34,17 @@
  </section>
  
  <section>
- <div class="playerButton">
- <img src="../../assets/back.svg" alt="Image précedent" (click)="back()">
- <img src="../../assets/stop.svg" alt="Image stop" (click)="stop()">
- <img src="../../assets/play.svg" alt="Image lecture" (click)="playMusic()" *ngIf="!musicIsReading">
- <img src="../../assets/break.svg" alt="Image pause" (click)="break()" *ngIf="musicIsReading">
- <img src="../../assets/next.svg" alt="Image suivant" (click)="next()">
- </div>
- <audio #music (timeupdate)="updateProgressBar($event)">
-    <source src={{musicTodisplay.path}} type="audio/mpeg">
-</audio>
-  <progress class="bar" *ngIf="musicIsReading || isBreak" [value]="progress" max="100"></progress> 
+    <div class="playerButton">
+        <img src="../../assets/back.svg" alt="Image précedent" (click)="back()">
+        <img src="../../assets/stop.svg" alt="Image stop" (click)="stop()">
+        <img src="../../assets/play.svg" alt="Image lecture" (click)="playMusic()" *ngIf="!musicIsReading">
+        <img src="../../assets/break.svg" alt="Image pause" (click)="break()" *ngIf="musicIsReading">
+        <img src="../../assets/next.svg" alt="Image suivant" (click)="next()">
+    </div>
+    <audio #music (timeupdate)="updateProgressBar($event)">
+        <source src={{musicTodisplay.path}} type="audio/mpeg">
+    </audio>
+    <progress *ngIf="musicIsReading || isBreak" value={{progress}} max="100" (click)="selectDurating($event)"></progress>
+    {{musicTodisplay.name}} 
  </section>
  

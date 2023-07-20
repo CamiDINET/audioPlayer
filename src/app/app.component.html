@@ -1,14 +1,11 @@
 <section>
   <form>
- 
      <select (change)="selectFilePath($event)">
          <option value="url" selected>URL</option>
          <option value="file">File</option>
      </select>
- 
      <input #url type="text" placeholder="Saisir une URL" *ngIf="filePathSelect === 'url'">
-     <input #file type="file" *ngIf="filePathSelect === 'file'" accept="audio/*" (change)="interceptPath($event)">
-     
+     <input #file type="file" *ngIf="filePathSelect === 'file'" accept="audio/*" (change)="interceptPath($event)">   
   </form>
  </section>
  
@@ -42,9 +39,9 @@
         <img src="../../assets/next.svg" alt="Image suivant" (click)="next()">
     </div>
     <audio #music (timeupdate)="updateProgressBar($event)">
-        <source src={{musicTodisplay.path}} type="audio/mpeg">
+        <source [src]="musicTodisplay.path" type="audio/mpeg">
     </audio>
-    <progress *ngIf="musicIsReading || isBreak" value={{progress}} max="100" (click)="selectDurating($event)"></progress>
-    {{musicTodisplay.name}} 
+    <progress [value]="progress" *ngIf="musicIsReading || isBreak" max="100" (click)="selectDurating($event)"></progress>
+    {{musicTodisplay.name}}
  </section>
  
